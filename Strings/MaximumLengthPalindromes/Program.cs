@@ -20,7 +20,7 @@ class Result
 
     // static string str;
     static long m = 1000000007;
-    static int max = 100000;
+    static int max = 50000;
     static long[] fact = new long[max + 1];
     static long[] inv = new long[max + 1];
     static List<int[]> input = new List<int[]>();
