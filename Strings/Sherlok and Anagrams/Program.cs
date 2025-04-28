@@ -24,24 +24,16 @@ class Result
             for (int blueLeft = 0; blueLeft <= s.Length - window - 1; blueLeft++)
             {
                 Array.Clear(blue);
-                for (
-                    int letterInBlueWindow = blueLeft;
-                    letterInBlueWindow < blueLeft + window;
-                    letterInBlueWindow++
-                )
+                for (int indexBlue = blueLeft; indexBlue < blueLeft + window; indexBlue++)
                 {
-                    blue[s[letterInBlueWindow] - 'a']++;
+                    blue[s[indexBlue] - 'a']++;
                 }
                 for (int greenLeft = blueLeft + 1; greenLeft <= s.Length - window; greenLeft++)
                 {
                     Array.Clear(green);
-                    for (
-                        int letterInGreenWindow = greenLeft;
-                        letterInGreenWindow < greenLeft + window;
-                        letterInGreenWindow++
-                    )
+                    for (int indexGreen = greenLeft; indexGreen < greenLeft + window; indexGreen++)
                     {
-                        green[s[letterInGreenWindow] - 'a']++;
+                        green[s[indexGreen] - 'a']++;
                     }
                     bool areEqual = true;
                     for (int i = 0; i < green.Length; i++)
