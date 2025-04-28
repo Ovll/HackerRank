@@ -74,7 +74,6 @@ class Result
             sb[n / 2] = '9';
         foreach (var item in dict)
         {
-            Console.WriteLine(item.Key);
             if (item.Value > 0)
                 sb[n - item.Key - 1] = (char)(sb[n - item.Key - 1] + item.Value);
             else
