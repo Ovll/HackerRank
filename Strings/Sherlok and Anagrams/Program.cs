@@ -19,33 +19,45 @@ class Result
     public static int sherlockAndAnagrams(string s)
     {
         count = 0;
-        for (int window = 1; window <= s.Length - 1; window++)
+        for (int window = 1; window < s.Length; window++)
         {
-            for (int blueLeft = 0; blueLeft <= s.Length - window - 1; blueLeft++)
+            int blueLeft = 0;
+            Array.Clear(blue);
+            for (int blueRight = 0; blueRight < s.Length - 1; blueRight++)
             {
-                Array.Clear(blue);
-                for (int indexBlue = blueLeft; indexBlue < blueLeft + window; indexBlue++)
+                blue[s[blueRight] - 'a']++;
+                if (blueRight - blueLeft + 1 > window)
                 {
-                    blue[s[indexBlue] - 'a']++;
+                    blue[s[blueLeft] - 'a']--;
+                    blueLeft++;
                 }
-                for (int greenLeft = blueLeft + 1; greenLeft <= s.Length - window; greenLeft++)
+                if (blueRight - blueLeft + 1 == window)
                 {
                     Array.Clear(green);
-                    for (int indexGreen = greenLeft; indexGreen < greenLeft + window; indexGreen++)
+                    int greenLeft = blueLeft + 1;
+                    for (int greenRight = blueLeft + 1; greenRight < s.Length; greenRight++)
                     {
-                        green[s[indexGreen] - 'a']++;
-                    }
-                    bool areEqual = true;
-                    for (int i = 0; i < green.Length; i++)
-                    {
-                        if (blue[i] != green[i])
+                        green[s[greenRight] - 'a']++;
+                        if (greenRight - greenLeft + 1 > window)
                         {
-                            areEqual = false;
-                            break;
+                            green[s[greenLeft] - 'a']--;
+                            greenLeft++;
+                        }
+                        if (greenRight - greenLeft + 1 == window)
+                        {
+                            bool areEqual = true;
+                            for (int i = 0; i < green.Length; i++)
+                            {
+                                if (blue[i] != green[i])
+                                {
+                                    areEqual = false;
+                                    break;
+                                }
+                            }
+                            if (areEqual)
+                                count++;
                         }
                     }
-                    if (areEqual)
-                        count++;
                 }
             }
         }
@@ -77,3 +89,39 @@ class Solution
         textWriter.Close();
     }
 }
+
+// public static int sherlockAndAnagrams(string s)
+// {
+//     count = 0;
+//     for (int window = 1; window <= s.Length - 1; window++)
+//     {
+//         for (int blueLeft = 0; blueLeft <= s.Length - window - 1; blueLeft++)
+//         {
+//             Array.Clear(blue);
+//             for (int indexBlue = blueLeft; indexBlue < blueLeft + window; indexBlue++)
+//             {
+//                 blue[s[indexBlue] - 'a']++;
+//             }
+//             for (int greenLeft = blueLeft + 1; greenLeft <= s.Length - window; greenLeft++)
+//             {
+//                 Array.Clear(green);
+//                 for (int indexGreen = greenLeft; indexGreen < greenLeft + window; indexGreen++)
+//                 {
+//                     green[s[indexGreen] - 'a']++;
+//                 }
+//                 bool areEqual = true;
+//                 for (int i = 0; i < green.Length; i++)
+//                 {
+//                     if (blue[i] != green[i])
+//                     {
+//                         areEqual = false;
+//                         break;
+//                     }
+//                 }
+//                 if (areEqual)
+//                     count++;
+//             }
+//         }
+//     }
+//     return count;
+// }
